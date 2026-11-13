@@ -1,0 +1,82 @@
+/* The workspace uses Streamlit widgets for keyboard and screen-reader access. */
+[data-testid="stAppViewContainer"] {
+  background: #f5f7fb;
+}
+[data-testid="stHeader"] { background: #f5f7fb; }
+[data-testid="stMainBlockContainer"] {
+  max-width: 78rem;
+  padding-top: 2.8rem;
+}
+[data-testid="stSidebar"] {
+  background: #fff;
+  border-right: 1px solid #e0e5ef;
+}
+[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+  background: #fff;
+}
+[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+  padding-top: 1.4rem;
+}
+[data-testid="stSidebar"] h2 { font-size: 1rem; }
+.st-key-workspace_hero {
+  background: radial-gradient(ellipse at 100% 0%, #344a86 0%, transparent 63%),
+              linear-gradient(115deg, #141e3a, #1e2c54);
+  border-radius: 1.25rem;
+  padding: clamp(1.3rem, 3.4vw, 2.7rem);
+  box-shadow: 0 10px 26px #172b5414;
+}
+.st-key-workspace_hero h1 {
+  color: #fff;
+  font-size: clamp(1.9rem, 3.8vw, 3.3rem);
+  letter-spacing: -.045em;
+  line-height: 1.1;
+  padding: 0;
+}
+.st-key-workspace_hero p {
+  color: #d9e4fb;
+  font-size: 1rem;
+  max-width: 40rem;
+}
+.st-key-workspace_hero h1 a { color: #d9e4fb; }
+[data-testid="stTabs"] [role="tablist"] {
+  gap: .35rem;
+  overflow-x: auto;
+  background: #fff;
+  padding: .35rem;
+  border: 1px solid #e0e5ef;
+  border-radius: .8rem;
+}
+[data-testid="stTabs"] [role="tab"] {
+  padding-inline: .85rem;
+  border-radius: .55rem;
+  white-space: nowrap;
+}
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] {
+  background: #eaf0ff;
+  color: #274db5;
+}
+[data-testid="stTabs"] [role="tablist"] > div[aria-hidden="true"] {
+  display: none;
+}
+[data-testid="stTabs"] [role="tabpanel"] { padding-top: 1rem; }
+[data-testid="stForm"], [data-testid="stExpander"] > details {
+  background: #fff;
+}
+.st-key-paper_actions button {
+  justify-content: flex-start;
+  text-align: left;
+  min-height: 3.25rem;
+  padding-inline: .8rem;
+  background: #fff;
+  border-color: #dce3ef;
+}
+.st-key-paper_actions button:disabled { background: #f9faff; }
+[data-testid="stChatMessage"] {
+  background: #fff;
+  border: 1px solid #e0e5ef;
+  border-radius: .95rem;
+}
+@media (max-width: 680px) {
+  [data-testid="stMainBlockContainer"] { padding-top: 1.6rem; }
+  [data-testid="stTabs"] [role="tab"] { padding-inline: .65rem; }
+}

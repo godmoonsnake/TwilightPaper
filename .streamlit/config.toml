@@ -1,0 +1,14 @@
+[theme]
+base = "light"
+primaryColor = "#365AC4"
+backgroundColor = "#F5F7FB"
+secondaryBackgroundColor = "#EEF2FA"
+textColor = "#17223C"
+font = "Inter: https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+
+[server]
+address = "127.0.0.1"
+maxUploadSize = 20
+
+[browser]
+gatherUsageStats = false
