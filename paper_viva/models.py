@@ -1,5 +1,3 @@
-"""Model configuration shared by the router and the four agents."""
-
 import os
 from dataclasses import dataclass
 from pathlib import Path
@@ -22,7 +20,7 @@ def config_value(name: str) -> str:
 
 
 class ModelConfigurationError(ValueError):
-    """The selected provider or its credentials need attention."""
+    pass
 
 
 @dataclass(frozen=True)

@@ -12,45 +12,45 @@
 
 - The default provider is **Ollama**, running **Qwen3 4B** locally. OpenAI, Google Gemini, and Groq are also selectable.
 - **Show it:** Select **Live AI** and **Ollama**, then click **Test model connection**.
-- **Code:** [Model configuration and client](paper_viva/models.py#L44)
+- **Code:** [Model configuration and client](paper_viva/models.py#L42)
 
 ### 2. Interactive GUI
 
 - The Streamlit interface provides PDF upload and indexing, a chat input, and tabs for chat, slides, viva practice, and session history.
 - **Show it:** Upload and index a PDF, type a question in **Paper chat**, and display the answer.
-- **Code:** [Streamlit workspace](app.py#L201)
+- **Code:** [Streamlit workspace](app.py#L199)
 
 ### 3. Prompt engineering
 
 - The intent router uses **few-shot prompting**. Its system prompt defines the available intents. Example user requests and expected assistant outputs show how to classify them.
 - The router's user prompt supplies the latest request and recent conversation. The paper agent's system prompt defines its role, evidence rules, and output format. Its user prompt supplies the selected PDF, conversation, and request.
 - **Show it:** Type a request and open **Run details · prompts and retrieval** to show the labeled system and user prompts and few-shot examples.
-- **Code:** [Router examples](paper_viva/agents.py#L29) and [paper agent prompt](paper_viva/agents.py#L81)
+- **Code:** [Router examples](paper_viva/agents.py#L27) and [paper agent prompt](paper_viva/agents.py#L79)
 
 ### 4. LangChain core components
 
 - `ChatPromptTemplate` builds the prompt. The LCEL router chain connects the template, model, final answer parser, and Pydantic route parser with `|`.
 - **Show it:** Open the router chain and compare its parsed result with **Detected intent** in the app.
-- **Code:** [LCEL routing chain](paper_viva/agents.py#L188)
+- **Code:** [LCEL routing chain](paper_viva/agents.py#L184)
 
 ### 5. Agentic RAG
 
 - The model can call `search_paper` with its own query. Retrieved passages return to the model as tool results. The app checks that cited PDF pages appeared in those results.
 - If the model skips retrieval on a paper task, a fallback search supplies evidence and is labeled in **Run details**. App help takes a separate route with zero searches.
 - **Show it:** Ask **How did the authors train DistilBERT using knowledge distillation?** Show the search query, passages, and page citations. Then ask **How do I use this app?** and show zero searches.
-- **Code:** [Search tool and agent loop](paper_viva/agents.py#L218)
+- **Code:** [Search tool and agent loop](paper_viva/agents.py#L214)
 
 ### 6. Intent detection and routing
 
 - The router classifies typed requests and dispatches them to the summary, concept, slides, viva, help, or clarification handler. Shortcut buttons use the intent selected by the user.
 - **Show it:** Type **Explain the authors’ method** and then **How do I use this app?** Open **Run details** on each response to compare the detected intents and handlers.
-- **Code:** [Request routing](paper_viva/agents.py#L173)
+- **Code:** [Request routing](paper_viva/agents.py#L170)
 
 ### 7. Vector database
 
 - ChromaDB stores PDF passage embeddings with page metadata and retrieves matching passages using cosine similarity. Semantic indexing uses MiniLM. Keyword search is also available.
 - **Show it:** Select **Semantic** before indexing a PDF. Show the ChromaDB passage count in the sidebar and the retrieved excerpts with page numbers in **Run details**.
-- **Code:** [Similarity query](paper_viva/paper.py#L45) and [vector indexing](paper_viva/paper.py#L103)
+- **Code:** [Similarity query](paper_viva/paper.py#L43) and [vector indexing](paper_viva/paper.py#L101)
 
 ## Verification
 

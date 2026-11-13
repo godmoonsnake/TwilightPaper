@@ -1,5 +1,3 @@
-"""Streamlit entry point for the Paper-to-Presentation & Viva Agent."""
-
 from dataclasses import dataclass
 from hashlib import sha256
 from pathlib import Path

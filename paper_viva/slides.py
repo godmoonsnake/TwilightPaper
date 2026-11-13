@@ -1,5 +1,3 @@
-"""Export the slide agent's validated content as an editable PowerPoint."""
-
 from io import BytesIO
 
 from pptx import Presentation

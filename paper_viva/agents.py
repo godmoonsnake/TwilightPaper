@@ -1,5 +1,3 @@
-"""Route requests and run a paper agent with model-controlled retrieval."""
-
 import json
 import re
 from dataclasses import dataclass, field
@@ -148,11 +146,10 @@ class AgentResult:
 
 
 class AgentError(RuntimeError):
-    """The model did not produce a valid, grounded response."""
+    pass
 
 
 class FinalAnswerParser(StrOutputParser):
-    """Strip thinking tags if a provider includes them in the answer text."""
 
     def parse(self, text: str) -> str:
         if "</think>" in text:
@@ -179,7 +176,6 @@ def run_request(
     selected_intent: Intent | None = None,
     slide_count: int | None = None,
 ) -> AgentResult:
-    """Dispatch a selected task, or classify a free-text request first."""
     inputs = {"request": request, "history": history or "(first request)"}
     prompts: list[PromptTrace] = []
     intent = selected_intent
@@ -214,9 +210,8 @@ def run_paper_agent(
 ) -> AgentResult:
     searches: list[SearchTrace] = []
 
-    @tool
+    @tool(description="Find passages in the current PDF by semantic similarity to a focused query.")
     def search_paper(query: str) -> str:
-        """Find passages in the current PDF by semantic similarity to a focused query."""
         passages = tuple(paper.search(query))
         searches.append(SearchTrace(query, passages))
         return json.dumps([
@@ -244,7 +239,6 @@ def run_paper_agent(
     agent_inputs = {**inputs, "filename": paper.filename, "tool_history": tool_history}
     search_chain = prompt | model.bind_tools([search_paper])
 
-    # The model may return an answer immediately or request one or more tool calls.
     while len(searches) < MAX_SEARCHES:
         prompts.append(PromptTrace(AGENT_NAMES[intent], tuple(prompt.format_messages(**agent_inputs))))
         response: AIMessage = search_chain.invoke(agent_inputs)
@@ -265,8 +259,6 @@ def run_paper_agent(
         response = (prompt | model).invoke(agent_inputs)
 
     if not any(search.passages for search in searches):
-        # The specialist decides what to search first. If it skips the tool,
-        # retrieve once from the request before allowing a paper-specific answer.
         query = f"{inputs['request'][:1200]} {AGENT_NAMES[intent]}"
         passages = tuple(paper.search(query))
         searches.append(SearchTrace(query, passages, fallback=True))

@@ -1,5 +1,3 @@
-"""Extract, index, and retrieve passages from a text-based research paper."""
-
 from dataclasses import dataclass
 from hashlib import blake2b
 from io import BytesIO
@@ -20,7 +18,7 @@ EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 
 
 class PaperError(ValueError):
-    """The uploaded file cannot be indexed."""
+    pass
 
 
 @dataclass(frozen=True)

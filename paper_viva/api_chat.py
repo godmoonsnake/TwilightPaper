@@ -1,5 +1,3 @@
-"""Non-streaming chat client for OpenAI-compatible providers."""
-
 import json
 from collections.abc import Sequence
 from typing import Any

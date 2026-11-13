@@ -1,5 +1,3 @@
-"""Teaching sample, extractive preview, and Markdown export."""
-
 import re
 
 from .agents import AgentResult, Intent, SearchTrace, Slide, SlideDeck
